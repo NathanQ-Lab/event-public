@@ -2,10 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-type ImageType = {
-  public_id: string;
-};
+import { CSSProperties } from "react";
 
 export default function Home() {
   return (
@@ -34,7 +31,6 @@ export default function Home() {
               alignItems: "center",
             }}
           >
-            {/* RED STRIP */}
             <div
               style={{
                 position: "absolute",
@@ -47,7 +43,6 @@ export default function Home() {
               }}
             />
 
-            {/* IMAGE */}
             <div
               style={{
                 width: "260px",
@@ -90,7 +85,6 @@ export default function Home() {
               gap: "40px",
             }}
           >
-            {/* COLLAGE */}
             <div
               style={{
                 flex: "1",
@@ -115,7 +109,6 @@ export default function Home() {
               )}
             </div>
 
-            {/* TEXT */}
             <div style={{ flex: "1", minWidth: "280px" }}>
               <h2 style={{ fontSize: "28px", marginBottom: "15px" }}>
                 Share the Moment
@@ -126,9 +119,7 @@ export default function Home() {
                 unforgettable memories.
               </p>
 
-              {/* ✅ WORKING BUTTONS */}
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                
                 <Link href="/upload" style={{ textDecoration: "none" }}>
                   <button style={btnPrimary}>Upload</button>
                 </Link>
@@ -136,7 +127,6 @@ export default function Home() {
                 <Link href="/gallery" style={{ textDecoration: "none" }}>
                   <button style={btnSecondary}>View Gallery</button>
                 </Link>
-
               </div>
             </div>
           </div>
@@ -188,10 +178,9 @@ export default function Home() {
   );
 }
 
-
 /* ================= STYLES ================= */
 
-const btnPrimary = {
+const btnPrimary: CSSProperties = {
   background: "#8b0000",
   color: "#fff",
   padding: "14px",
@@ -200,7 +189,7 @@ const btnPrimary = {
   cursor: "pointer",
 };
 
-const btnSecondary = {
+const btnSecondary: CSSProperties = {
   border: "1px solid #8b0000",
   padding: "14px",
   borderRadius: "999px",
@@ -209,7 +198,7 @@ const btnSecondary = {
   cursor: "pointer",
 };
 
-const programCard = {
+const programCard: CSSProperties = {
   width: "100%",
   maxWidth: "600px",
   background: "#fff",
@@ -217,14 +206,14 @@ const programCard = {
   borderRadius: "20px",
 };
 
-const programTitle = {
+const programTitle: CSSProperties = {
   textAlign: "center",
   color: "#8b0000",
   fontSize: "32px",
   marginBottom: "60px",
 };
 
-const timelineLine = {
+const timelineLine: CSSProperties = {
   position: "absolute",
   left: "50%",
   top: 0,
@@ -234,45 +223,45 @@ const timelineLine = {
   transform: "translateX(-50%)",
 };
 
-const timelineRow = {
+const timelineRow: CSSProperties = {
   display: "flex",
   alignItems: "center",
   marginBottom: "45px",
 };
 
-const timeStyle = {
+const timeStyle: CSSProperties = {
   width: "45%",
   textAlign: "right",
   paddingRight: "20px",
   color: "#8b0000",
 };
 
-const dotWrapper = {
+const dotWrapper: CSSProperties = {
   width: "10%",
   display: "flex",
   justifyContent: "center",
 };
 
-const dotStyle = {
+const dotStyle: CSSProperties = {
   width: "14px",
   height: "14px",
   background: "#8b0000",
   borderRadius: "50%",
 };
 
-const textStyle = {
+const textStyle: CSSProperties = {
   width: "45%",
   paddingLeft: "20px",
 };
 
-const footerStyle = {
+const footerStyle: CSSProperties = {
   background: "#000",
   color: "#fff",
   padding: "60px 20px",
   textAlign: "center",
 };
 
-const dividerRed = {
+const dividerRed: CSSProperties = {
   width: "60px",
   height: "2px",
   background: "#8b0000",
