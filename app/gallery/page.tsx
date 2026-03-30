@@ -1,6 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 
+type ImageType = {
+  public_id: string;
+  [key: string]: any;
+};
+
 export default function Gallery() {
   const [images, setImages] = useState([]);
 
