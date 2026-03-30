@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
+type ImageType = {
+  public_id: string;
+};
+
 export default function Home() {
   return (
     <>
