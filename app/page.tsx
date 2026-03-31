@@ -4,6 +4,57 @@ import Image from "next/image";
 import Link from "next/link";
 import { CSSProperties } from "react";
 
+/* ================= FLOURISH (PURE CODE) ================= */
+const Flourish = () => (
+  <div
+    style={{
+      width: "140px",
+      height: "14px",
+      margin: "10px auto 22px",
+      position: "relative",
+      opacity: 0.9,
+    }}
+  >
+    {/* Left line */}
+    <span
+      style={{
+        position: "absolute",
+        left: 0,
+        top: "50%",
+        width: "55px",
+        height: "1.5px",
+        background: "#b08d57",
+      }}
+    />
+
+    {/* Center curl */}
+    <span
+      style={{
+        position: "absolute",
+        left: "50%",
+        top: "50%",
+        width: "14px",
+        height: "14px",
+        border: "1.5px solid #b08d57",
+        borderRadius: "50%",
+        transform: "translate(-50%, -50%) rotate(45deg)",
+      }}
+    />
+
+    {/* Right line */}
+    <span
+      style={{
+        position: "absolute",
+        right: 0,
+        top: "50%",
+        width: "55px",
+        height: "1.5px",
+        background: "#b08d57",
+      }}
+    />
+  </div>
+);
+
 export default function Home() {
   return (
     <>
@@ -71,7 +122,7 @@ export default function Home() {
           </div>
 
           <h1 style={{ color: "#ff4d4d", fontSize: "38px", marginTop: "25px" }}>
-            Naydine’s 21st
+            Celebrating 21 Years of Naydine
           </h1>
         </section>
 
@@ -125,93 +176,80 @@ export default function Home() {
                 unforgettable memories.
               </p>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-  <Link href="/gallery" style={{ textDecoration: "none" }}>
-    <button style={btnPrimary}>
-      Upload & View Gallery
-    </button>
-  </Link>
-</div>
+              <Link href="/gallery" style={{ textDecoration: "none" }}>
+                <button style={btnPrimary}>Upload & View Gallery</button>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* ================= PROGRAM (ELEGANT LIST) ================= */}
-<section
-  style={{
-    background: "#f4f4f4",
-    padding: "120px 20px",
-    display: "flex",
-    justifyContent: "center",
-  }}
->
-  <div
-    style={{
-      maxWidth: "600px",
-      width: "100%",
-      background: "#fff",
-      padding: "70px 40px",
-      borderRadius: "20px",
-      textAlign: "center",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-    }}
-  >
-    <h2
-      style={{
-        color: "#8b0000",
-        fontSize: "32px",
-        marginBottom: "40px",
-      }}
-    >
-      Program
-    </h2>
-
-    {[
-      "Opening - Laurica",
-      "Welcoming - Austin aka la nose",
-      "Cake Cutting",
-      "Speech - Audine aka black one",
-      "Toast",
-      "Thank you speech - Naydine",
-      "Party"
-    ].map((item, i) => (
-      <div key={i} style={{ marginBottom: "25px" }}>
-        
-        {/* TEXT */}
-        <p
+        {/* ================= PROGRAM ================= */}
+        <section
           style={{
-            fontSize: "18px",
-            color: "#333",
-            marginBottom: "10px",
+            background: "#f4f4f4",
+            padding: "120px 20px",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          {item}
-        </p>
-
-        {/* SEPARATOR LINE */}
-        {i !== 5 && (
           <div
             style={{
-              width: "80px",
-              height: "3px",
-              background: "#b30000",
-              margin: "10px auto",
-              borderRadius: "10px",
+              maxWidth: "600px",
+              width: "100%",
+              background: "#fff",
+              padding: "70px 40px",
+              borderRadius: "20px",
+              textAlign: "center",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
             }}
-          />
-        )}
-      </div>
-    ))}
-  </div>
-</section>
-        
-        {/* ================= PERSONAL MESSAGE ================= */}
+          >
+            <h2
+              style={{
+                color: "#8b0000",
+                fontSize: "32px",
+                marginBottom: "40px",
+              }}
+            >
+              Program
+            </h2>
 
+            {[
+              "Opening - Laurica",
+              "Welcoming - Austin",
+              "Speech - Nathan",
+              "Speech - Austin",
+              "Speech - Friends",
+              "Speech - Neville",
+              "Presentation of the 21st Key - Quade",
+              "Key handover ceremony - Stacey & Neville",
+              "Toast",
+              "Thank you speech - Naydine",
+              "Party",
+            ].map((item, i) => (
+              <div key={i} style={{ marginBottom: "25px" }}>
+                <p
+                  style={{
+                    fontSize: "18px",
+                    color: "#333",
+                    marginBottom: "6px",
+                  }}
+                >
+                  {item}
+                </p>
+
+                {i !== 10 && <Flourish />}
+              </div>
+            ))}
+          </div>
+        </section>
+        
+            {/* ================= PERSONAL MESSAGE ================= */}
 <section
   style={{
     background: "#fff",
-    padding: "70px 20px",
+    padding: "90px 20px",
     textAlign: "center",
+    borderTop: "1px solid #eee",
   }}
 >
   <div
@@ -264,7 +302,6 @@ export default function Home() {
           <div style={dividerRed} />
           <p style={{ fontSize: "12px", color: "#777" }}>Made with love 🎉</p>
         </footer>
-
       </main>
     </>
   );
@@ -279,71 +316,6 @@ const btnPrimary: CSSProperties = {
   borderRadius: "999px",
   border: "none",
   cursor: "pointer",
-};
-
-const btnSecondary: CSSProperties = {
-  border: "1px solid #8b0000",
-  padding: "14px",
-  borderRadius: "999px",
-  background: "#fff",
-  color: "#8b0000",
-  cursor: "pointer",
-};
-
-const programCard: CSSProperties = {
-  width: "100%",
-  maxWidth: "600px",
-  background: "#fff",
-  padding: "70px 40px",
-  borderRadius: "20px",
-};
-
-const programTitle: CSSProperties = {
-  textAlign: "center",
-  color: "#8b0000",
-  fontSize: "32px",
-  marginBottom: "60px",
-};
-
-const timelineLine: CSSProperties = {
-  position: "absolute",
-  left: "50%",
-  top: 0,
-  bottom: 0,
-  width: "2px",
-  background: "#ccc",
-  transform: "translateX(-50%)",
-};
-
-const timelineRow: CSSProperties = {
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "45px",
-};
-
-const timeStyle: CSSProperties = {
-  width: "45%",
-  textAlign: "right",
-  paddingRight: "20px",
-  color: "#8b0000",
-};
-
-const dotWrapper: CSSProperties = {
-  width: "10%",
-  display: "flex",
-  justifyContent: "center",
-};
-
-const dotStyle: CSSProperties = {
-  width: "14px",
-  height: "14px",
-  background: "#8b0000",
-  borderRadius: "50%",
-};
-
-const textStyle: CSSProperties = {
-  width: "45%",
-  paddingLeft: "20px",
 };
 
 const footerStyle: CSSProperties = {
