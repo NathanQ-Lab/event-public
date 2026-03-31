@@ -146,7 +146,7 @@ export default function Home() {
                 gap: "10px",
               }}
             >
-              {["img1.jpg", "img1.jpg", "img1.jpg", "img1.jpg"].map(
+              {["img2.jpg", "img3.jpg", "img1.jpg", "img1.jpg"].map(
                 (img, i) => (
                   <Image
                     key={i}
@@ -210,14 +210,13 @@ export default function Home() {
                 marginBottom: "40px",
               }}
             >
-              Program
+              Itinerary
             </h2>
 
             {[
               "Opening - Laurica",
               "Welcoming - Austin",
               "Speech - Nathan",
-              "Speech - Austin",
               "Speech - Friends",
               "Speech - Neville",
               "Presentation of the 21st Key - Quade",
@@ -281,7 +280,7 @@ export default function Home() {
         whiteSpace: "nowrap",
       }}
     >
-      “Dag se”
+      “Nag se ou”
     </p>
 
     {/* RIGHT LINE */}
