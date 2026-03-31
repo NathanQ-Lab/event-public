@@ -36,8 +36,7 @@ export default function Home() {
                 position: "absolute",
                 width: "100%",
                 height: "70px",
-                background:
-                  "linear-gradient(90deg, #5a0000, #cc0000, #5a0000)",
+                background: "linear-gradient(90deg, #5a0000, #cc0000, #5a0000)",
                 top: "50%",
                 transform: "translateY(-50%)",
               }}
@@ -58,12 +57,15 @@ export default function Home() {
               <Image
                 src="/images/img1.jpg"
                 alt="Naydine"
-                fill
-                sizes="260px"
+                width={520}
+                height={520}
                 quality={100}
                 priority
-                unoptimized
-                style={{ objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
               />
             </div>
           </div>
@@ -95,9 +97,13 @@ export default function Home() {
             >
               {["img1.jpg", "img1.jpg", "img1.jpg", "img1.jpg"].map(
                 (img, i) => (
-                  <img
+                  <Image
                     key={i}
                     src={`/images/${img}`}
+                    alt="gallery"
+                    width={600}
+                    height={400}
+                    quality={100}
                     style={{
                       width: "100%",
                       height: "150px",
@@ -129,6 +135,62 @@ export default function Home() {
                 </Link>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ================= PERSONAL MESSAGE ================= */}
+        <section
+          style={{
+            background: "#0a0a0a",
+            color: "#fff",
+            padding: "120px 20px",
+            textAlign: "center",
+          }}
+        >
+          <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+
+            <div
+              style={{
+                width: "60px",
+                height: "2px",
+                background: "#8b0000",
+                margin: "0 auto 30px",
+              }}
+            />
+
+            <h2
+              style={{
+                fontSize: "32px",
+                color: "#ff4d4d",
+                marginBottom: "25px",
+              }}
+            >
+              Dag se 🎉
+            </h2>
+
+            <p
+              style={{
+                fontSize: "18px",
+                color: "#ccc",
+                lineHeight: "1.8",
+              }}
+            >
+              Gelukkige 21ste verjaarsdag! 🎂 <br />
+              Vandag vier ons jou en alles wat jou so spesiaal maak. <br />
+              Dankie vir al die lag, die herinneringe en die vreugde wat jy bring. <br />
+              Ek is trots om jou broer te wees. ❤️ <br />
+              Mag hierdie nuwe hoofstuk vol seëninge en sukses wees.
+            </p>
+
+            <div
+              style={{
+                width: "60px",
+                height: "2px",
+                background: "#8b0000",
+                margin: "40px auto 0",
+              }}
+            />
+
           </div>
         </section>
 

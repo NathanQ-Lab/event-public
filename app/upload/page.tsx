@@ -4,6 +4,7 @@ import { useState } from "react";
 
 export default function Upload() {
   const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -14,23 +15,23 @@ export default function Upload() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "nadine-21st"); // your Cloudinary preset
 
-      const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dfb5fwm4/image/upload",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
       const data = await res.json();
-      console.log("Uploaded:", data);
 
+      if (!res.ok) {
+        throw new Error(data.error || "Upload failed");
+      }
+
+      setImageUrl(data.secure_url);
       alert("Upload successful 🎉");
-    } catch (error) {
-      console.error("Upload failed:", error);
-      alert("Upload failed ❌");
+    } catch (error: any) {
+      console.error("Upload failed:", error.message);
+      alert("Upload failed ❌: " + error.message);
     }
 
     setUploading(false);
@@ -64,6 +65,20 @@ export default function Upload() {
       />
 
       {uploading && <p>Uploading...</p>}
+
+      {imageUrl && (
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <p style={{ color: "#ccc" }}>Uploaded Image:</p>
+          <img
+            src={imageUrl}
+            style={{
+              width: "200px",
+              borderRadius: "10px",
+              marginTop: "10px",
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
