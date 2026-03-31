@@ -126,106 +126,136 @@ export default function Home() {
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <Link href="/upload" style={{ textDecoration: "none" }}>
-                  <button style={btnPrimary}>Upload</button>
-                </Link>
-
-                <Link href="/gallery" style={{ textDecoration: "none" }}>
-                  <button style={btnSecondary}>View Gallery</button>
-                </Link>
-              </div>
+  <Link href="/gallery" style={{ textDecoration: "none" }}>
+    <button style={btnPrimary}>
+      Upload & View Gallery
+    </button>
+  </Link>
+</div>
             </div>
           </div>
         </section>
 
+        {/* ================= PROGRAM (ELEGANT LIST) ================= */}
+<section
+  style={{
+    background: "#f4f4f4",
+    padding: "120px 20px",
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "600px",
+      width: "100%",
+      background: "#fff",
+      padding: "70px 40px",
+      borderRadius: "20px",
+      textAlign: "center",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+    }}
+  >
+    <h2
+      style={{
+        color: "#8b0000",
+        fontSize: "32px",
+        marginBottom: "40px",
+      }}
+    >
+      Program
+    </h2>
+
+    {[
+      "Opening - Laurica",
+      "Welcoming - Austin aka la nose",
+      "Cake Cutting",
+      "Speech - Audine aka black one",
+      "Toast",
+      "Thank you speech - Naydine",
+      "Party"
+    ].map((item, i) => (
+      <div key={i} style={{ marginBottom: "25px" }}>
+        
+        {/* TEXT */}
+        <p
+          style={{
+            fontSize: "18px",
+            color: "#333",
+            marginBottom: "10px",
+          }}
+        >
+          {item}
+        </p>
+
+        {/* SEPARATOR LINE */}
+        {i !== 5 && (
+          <div
+            style={{
+              width: "80px",
+              height: "3px",
+              background: "#b30000",
+              margin: "10px auto",
+              borderRadius: "10px",
+            }}
+          />
+        )}
+      </div>
+    ))}
+  </div>
+</section>
+        
         {/* ================= PERSONAL MESSAGE ================= */}
-        <section
-          style={{
-            background: "#0a0a0a",
-            color: "#fff",
-            padding: "120px 20px",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ maxWidth: "700px", margin: "0 auto" }}>
 
-            <div
-              style={{
-                width: "60px",
-                height: "2px",
-                background: "#8b0000",
-                margin: "0 auto 30px",
-              }}
-            />
+<section
+  style={{
+    background: "#fff",
+    padding: "70px 20px",
+    textAlign: "center",
+  }}
+>
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "20px",
+      maxWidth: "600px",
+      margin: "0 auto",
+    }}
+  >
+    {/* LEFT LINE */}
+    <div
+      style={{
+        flex: 1,
+        height: "1px",
+        background: "#ccc",
+      }}
+    />
 
-            <h2
-              style={{
-                fontSize: "32px",
-                color: "#ff4d4d",
-                marginBottom: "25px",
-              }}
-            >
-              Dag se 🎉
-            </h2>
+    {/* TEXT */}
+    <p
+      style={{
+        color: "#8b0000",
+        fontStyle: "italic",
+        fontSize: "18px",
+        letterSpacing: "1px",
+        whiteSpace: "nowrap",
+      }}
+    >
+      “Dag se”
+    </p>
 
-            <p
-              style={{
-                fontSize: "18px",
-                color: "#ccc",
-                lineHeight: "1.8",
-              }}
-            >
-              Gelukkige 21ste verjaarsdag! 🎂 <br />
-              Vandag vier ons jou en alles wat jou so spesiaal maak. <br />
-              Dankie vir al die lag, die herinneringe en die vreugde wat jy bring. <br />
-              Ek is trots om jou broer te wees. ❤️ <br />
-              Mag hierdie nuwe hoofstuk vol seëninge en sukses wees.
-            </p>
-
-            <div
-              style={{
-                width: "60px",
-                height: "2px",
-                background: "#8b0000",
-                margin: "40px auto 0",
-              }}
-            />
-
-          </div>
-        </section>
-
-        {/* ================= PROGRAM ================= */}
-        <section
-          style={{
-            background: "#f4f4f4",
-            padding: "120px 20px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div style={programCard}>
-            <h2 style={programTitle}>Program</h2>
-
-            <div style={{ position: "relative" }}>
-              <div style={timelineLine} />
-
-              {[
-                { time: "18:00", title: "Arrival" },
-                { time: "19:00", title: "Speeches" },
-                { time: "20:00", title: "Cake Cutting" },
-                { time: "21:00", title: "Party 🎉" },
-              ].map((item, i) => (
-                <div key={i} style={timelineRow}>
-                  <div style={timeStyle}>{item.time}</div>
-                  <div style={dotWrapper}>
-                    <div style={dotStyle} />
-                  </div>
-                  <div style={textStyle}>{item.title}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+    {/* RIGHT LINE */}
+    <div
+      style={{
+        flex: 1,
+        height: "1px",
+        background: "#ccc",
+      }}
+    />
+  </div>
+</section>
 
         {/* ================= FOOTER ================= */}
         <footer style={footerStyle}>

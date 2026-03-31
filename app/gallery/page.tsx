@@ -1,88 +1,154 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function Gallery() {
+export default function GalleryPage() {
   const [images, setImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const cameraInputRef = useRef<HTMLInputElement>(null);
+
+  // Load existing images
   useEffect(() => {
-    fetchImages();
+    fetch("/api/images")
+      .then(res => res.json())
+      .then(data => setImages(data.images || []))
+      .catch(console.error);
   }, []);
 
-  const fetchImages = async () => {
-    try {
-      const res = await fetch("/api/images");
-      const data = await res.json();
-      setImages(data.images || []);
-    } catch (err) {
-      console.error("Failed to load images");
+  // Shared upload handler
+  const uploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    setUploading(true);
+
+    const res = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setImages(prev => [data.url, ...prev]);
     }
-    setLoading(false);
+
+    setUploading(false);
   };
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#0a0a0a",
-        color: "#fff",
-        padding: "60px 20px",
-        textAlign: "center",
-      }}
-    >
-      <h1 style={{ color: "#ff4d4d", marginBottom: "10px" }}>
-        Gallery 📸
-      </h1>
-
-      <p style={{ color: "#aaa", marginBottom: "30px" }}>
-        Refresh to see new photos
-      </p>
-
-      {/* Refresh button */}
-      <button
-        onClick={fetchImages}
+    <div style={{ padding: 20, fontFamily: "Georgia, serif" }}>
+      {/* ================= UPLOAD BOX ================= */}
+      <div
         style={{
-          background: "#8b0000",
-          color: "#fff",
-          padding: "10px 20px",
-          borderRadius: "999px",
-          border: "none",
-          marginBottom: "30px",
-          cursor: "pointer",
+          background: "#fff",
+          borderRadius: "16px",
+          padding: "30px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.08)",
+          textAlign: "center",
+          maxWidth: "600px",
+          margin: "0 auto 40px",
         }}
       >
-        Refresh 🔄
-      </button>
+        <h2 style={{ fontSize: "26px", marginBottom: "10px", color: "#8b0000" }}>
+          Upload Your Photos
+        </h2>
 
-      {loading ? (
-        <p>Loading...</p>
-      ) : images.length === 0 ? (
-        <p style={{ color: "#777" }}>No photos yet</p>
-      ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "15px",
-            maxWidth: "1000px",
-            margin: "0 auto",
-          }}
-        >
-          {images.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              style={{
-                width: "100%",
-                height: "200px",
-                objectFit: "cover",
-                borderRadius: "12px",
-              }}
-            />
-          ))}
+        <p style={{ color: "#555", marginBottom: "25px" }}>
+          Choose from your device or take a picture
+        </p>
+
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            style={btnPrimary}
+          >
+            📁 From Device
+          </button>
+
+          <button
+            onClick={() => cameraInputRef.current?.click()}
+            disabled={uploading}
+            style={btnSecondary}
+          >
+            📷 Take Picture
+          </button>
         </div>
-      )}
-    </main>
+
+        {uploading && <p style={{ marginTop: "15px" }}>Uploading...</p>}
+
+        {/* Hidden inputs */}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          hidden
+          onChange={e => {
+            const file = e.target.files?.[0];
+            if (file) uploadFile(file);
+          }}
+        />
+
+        <input
+          ref={cameraInputRef}
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+          onChange={e => {
+            const file = e.target.files?.[0];
+            if (file) uploadFile(file);
+          }}
+        />
+      </div>
+
+      {/* ================= GALLERY GRID ================= */}
+      <div
+  style={{
+    columnCount: 2,
+    columnGap: "14px",
+  }}
+>
+        {images.map((src, i) => (
+          <img
+  key={i}
+  src={src}
+  alt="uploaded"
+  style={{
+    width: "100%",
+    height: "auto",
+    borderRadius: "12px",
+    marginBottom: "14px",
+    display: "block",
+  }}
+/>
+        ))}
+      </div>
+    </div>
   );
 }
+
+/* ================= STYLES ================= */
+
+const btnPrimary = {
+  background: "#8b0000",
+  color: "#fff",
+  padding: "14px 20px",
+  borderRadius: "999px",
+  border: "none",
+  cursor: "pointer",
+  fontWeight: "bold",
+};
+
+const btnSecondary = {
+  border: "1px solid #8b0000",
+  padding: "14px 20px",
+  borderRadius: "999px",
+  background: "#fff",
+  color: "#8b0000",
+  cursor: "pointer",
+  fontWeight: "bold",
+};

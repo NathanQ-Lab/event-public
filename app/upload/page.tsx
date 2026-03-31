@@ -4,79 +4,116 @@ import { useState } from "react";
 
 export default function Upload() {
   const [uploading, setUploading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrls, setImageUrls] = useState<string[]>([]);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
     setUploading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("file", file);
+      const uploadedImages: string[] = [];
 
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+      for (const file of Array.from(files)) {
+        const formData = new FormData();
+        formData.append("file", file);
 
-      const data = await res.json();
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
 
-      if (!res.ok) {
-        throw new Error(data.error || "Upload failed");
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Upload failed");
+        }
+
+        uploadedImages.push(data.secure_url);
       }
 
-      setImageUrl(data.secure_url);
-      alert("Upload successful 🎉");
+      setImageUrls((prev) => [...prev, ...uploadedImages]);
+      alert("Images uploaded successfully 🎉");
     } catch (error: any) {
       console.error("Upload failed:", error.message);
       alert("Upload failed ❌: " + error.message);
     }
 
     setUploading(false);
+    e.target.value = ""; // reset input
   };
 
   return (
     <div
       style={{
         minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        padding: "60px 20px",
         background: "#0a0a0a",
         color: "#fff",
-        flexDirection: "column",
-        gap: "20px",
       }}
     >
-      <h1 style={{ color: "#ff4d4d" }}>Upload Photos</h1>
-
-      <input
-        type="file"
-        onChange={handleUpload}
-        disabled={uploading}
+      <h1
         style={{
-          padding: "10px",
-          background: "#fff",
-          color: "#000",
-          borderRadius: "6px",
+          textAlign: "center",
+          color: "#ff4d4d",
+          marginBottom: "30px",
         }}
-      />
+      >
+        Upload Party Photos
+      </h1>
 
-      {uploading && <p>Uploading...</p>}
+      {/* Upload Input */}
+      <div style={{ textAlign: "center", marginBottom: "40px" }}>
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          onChange={handleUpload}
+          disabled={uploading}
+          style={{
+            padding: "12px",
+            background: "#fff",
+            color: "#000",
+            borderRadius: "8px",
+            cursor: "pointer",
+          }}
+        />
+        {uploading && <p style={{ marginTop: "10px" }}>Uploading...</p>}
+      </div>
 
-      {imageUrl && (
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
-          <p style={{ color: "#ccc" }}>Uploaded Image:</p>
-          <img
-            src={imageUrl}
-            style={{
-              width: "200px",
-              borderRadius: "10px",
-              marginTop: "10px",
-            }}
-          />
+      {/* Gallery */}
+      {imageUrls.length > 0 && (
+        <div
+          style={{
+            maxWidth: "1100px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+            gap: "16px",
+          }}
+        >
+          {imageUrls.map((url, i) => (
+            <div
+              key={i}
+              style={{
+                background: "#111",
+                padding: "10px",
+                borderRadius: "12px",
+              }}
+            >
+              <img
+                src={url}
+                alt={`Uploaded ${i}`}
+                style={{
+                  width: "100%",
+                  height: "250px",
+                  objectFit: "cover", // 🔥 prevents blur
+                  borderRadius: "10px",
+                }}
+              />
+            </div>
+          ))}
         </div>
       )}
     </div>
