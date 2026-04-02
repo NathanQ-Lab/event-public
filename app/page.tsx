@@ -283,7 +283,7 @@ export default function Home() {
         whiteSpace: "nowrap",
       }}
     >
-      Dag se ou”
+      "Dag se ou”
     </p>
 
     {/* RIGHT LINE */}
