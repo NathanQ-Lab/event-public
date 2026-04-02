@@ -126,122 +126,125 @@ export default function Home() {
           </h1>
         </section>
 
-        {/* ================= SPLIT ================= */}
-        <section style={{ background: "#f8f8f8", padding: "80px 20px" }}>
-          <div
-            style={{
-              maxWidth: "1000px",
-              margin: "0 auto",
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              gap: "40px",
-            }}
-          >
-            <div
-              style={{
-                flex: "1",
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "10px",
-              }}
-            >
-              {["img2.jpg", "img3.jpg", "img1.jpg", "img1.jpg"].map(
-                (img, i) => (
-                  <Image
-                    key={i}
-                    src={`/images/${img}`}
-                    alt="gallery"
-                    width={600}
-                    height={400}
-                    quality={100}
-                    style={{
-                      width: "100%",
-                      height: "150px",
-                      objectFit: "cover",
-                      borderRadius: "12px",
-                    }}
-                  />
-                )
-              )}
-            </div>
+       {/* ================= SPLIT ================= */}
+<section style={{ background: "#f8f8f8", padding: "80px 20px" }}>
+  <div
+    style={{
+      maxWidth: "1000px",
+      margin: "0 auto",
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: "40px",
+    }}
+  >
+    {/* IMAGE SIDE */}
+    <div style={{ flex: "1", minWidth: "280px" }}>
+      <Image
+        src="/images/img3.jpg"   // 👈 choose the image you want
+        alt="Share the moment"
+        width={1200}
+        height={800}
+        quality={100}
+        sizes="(max-width: 768px) 100vw, 500px"
+        style={{
+          width: "100%",
+          height: "auto",
+          borderRadius: "16px",
+          objectFit: "cover",
+        }}
+      />
+    </div>
 
-            <div style={{ flex: "1", minWidth: "280px" }}>
-              <h2 style={{ fontSize: "28px", marginBottom: "15px" }}>
-                Share the Moment
-              </h2>
+    {/* TEXT SIDE */}
+    <div style={{ flex: "1", minWidth: "280px" }}>
+      <h2 style={{ fontSize: "28px", marginBottom: "15px" }}>
+        Share the Moment
+      </h2>
 
-              <p style={{ marginBottom: "25px", color: "#444" }}>
-                Please share moments captured at the party and help create
-                unforgettable memories.
-              </p>
+      <p style={{ marginBottom: "25px", color: "#444" }}>
+        Please share moments captured at the party and help create unforgettable
+        memories.
+      </p>
 
-              <Link href="/gallery" style={{ textDecoration: "none" }}>
-                <button style={btnPrimary}>Upload & View Gallery</button>
-              </Link>
-            </div>
-          </div>
-        </section>
+      <Link href="/gallery" style={{ textDecoration: "none" }}>
+        <button style={btnPrimary}>Upload & View Gallery</button>
+      </Link>
+    </div>
+  </div>
+</section>
 
-        {/* ================= PROGRAM ================= */}
-        <section
-          style={{
-            background: "#f4f4f4",
-            padding: "120px 20px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              maxWidth: "600px",
-              width: "100%",
-              background: "#fff",
-              padding: "70px 40px",
-              borderRadius: "20px",
-              textAlign: "center",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-            }}
-          >
-            <h2
-              style={{
-                color: "#8b0000",
-                fontSize: "32px",
-                marginBottom: "40px",
-              }}
-            >
-              Itinerary
-            </h2>
+       {/* ================= PROGRAM ================= */}
+<section
+  style={{
+    background: "#f4f4f4",
+    padding: "120px 20px",
+    display: "flex",
+    justifyContent: "center",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "600px",
+      width: "100%",
+      background: "#fff",
+      padding: "70px 40px",
+      borderRadius: "20px",
+      textAlign: "center",
+      boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
+    }}
+  >
+    <h2
+      style={{
+        color: "#8b0000",
+        fontSize: "32px",
+        marginBottom: "40px",
+      }}
+    >
+      Itinerary
+    </h2>
 
-            {[
-              "Opening - Laurica",
-              "Welcoming - Austin",
-              "Speech - Nathan",
-              "Speech - Friends",
-              "Speech - Neville",
-              "Presentation of the 21st Key - Quade",
-              "Key handover ceremony - Stacey & Neville",
-              "Toast",
-              "Thank you speech - Naydine",
-              "Party",
-            ].map((item, i) => (
-              <div key={i} style={{ marginBottom: "25px" }}>
-                <p
-                  style={{
-                    fontSize: "18px",
-                    color: "#333",
-                    marginBottom: "6px",
-                  }}
-                >
-                  {item}
-                </p>
+    {[
+  { title: "Opening", names: ["Laurica"] },
+  { title: "Welcoming", names: ["Austin"] },
+  { title: "Speeches", names: ["Audine", "Nathan", "Neville", "Friends"] },
+  { title: "Presentation of the 21st Key", names: ["Quade"] },
+  { title: "Key handover ceremony", names: ["Stacey", "Neville"] },
+  { title: "Toast", names: [] },
+  { title: "Party", names: [] },
+].map((item, i) => (
+  <div key={i} style={{ marginBottom: "30px" }}>
+    {/* TITLE */}
+    <p
+      style={{
+        fontSize: "20px",
+        color: "#333",
+        fontWeight: "600",
+        marginBottom: "6px",
+      }}
+    >
+      {item.title}
+    </p>
 
-                {i !== 10 && <Flourish />}
-              </div>
-            ))}
-          </div>
-        </section>
-        
+    {/* NAMES (only if they exist) */}
+    {item.names.length > 0 && (
+      <p
+        style={{
+          fontSize: "17px",
+          color: "#555",
+          marginBottom: "10px",
+        }}
+      >
+        {item.names.join(" · ")}
+      </p>
+    )}
+
+    {/* DIVIDER */}
+    {i !== 6 && <Flourish />}
+  </div>
+))}
+  </div>
+</section>
             {/* ================= PERSONAL MESSAGE ================= */}
 <section
   style={{
@@ -280,7 +283,7 @@ export default function Home() {
         whiteSpace: "nowrap",
       }}
     >
-      “Nag se ou”
+      Dag se ou”
     </p>
 
     {/* RIGHT LINE */}
