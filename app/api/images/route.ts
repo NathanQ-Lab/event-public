@@ -3,15 +3,15 @@ import { NextResponse } from "next/server";
 
 // 🔐 Your Cloudinary config
 cloudinary.config({
-  cloud_name: "dffb5fwm4",
-  api_key: "887853347394579",
-  api_secret: "XSiL2utCVMIbSf1q146YJm_4pj0"
+  cloud_name: "",
+  api_key: "",
+  api_secret: ""
 });
 
 export async function GET() {
   try {
     const result = await cloudinary.search
-      .expression("folder:nadine-21st")
+      .expression("")
       .sort_by("created_at", "desc")
       .max_results(50)
       .execute();
